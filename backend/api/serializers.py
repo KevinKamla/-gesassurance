@@ -46,21 +46,9 @@ class ClientSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Un client avec cet email existe déjà.")
         return value
     
-# class ProfileSerializer(serializers.ModelSerializer):
-#     # Inclure les assurances liées au client (optionnel, pour une vue détaillée)
-#     insurances = InsuranceSerializer(many=True, read_only=True)
-#     branch_name = serializers.ReadOnlyField(source='branch.name')
+class ProfilesSerializer(serializers.ModelSerializer):
 
-#     class Meta:
-#         model = Profile
-#         fields = [
-#             'id', 'first_name', 'last_name', 'email', 'phone', 
-#             'address', 'branch', 'branch_name', 'insurances'
-#         ]
-#         read_only_fields = ['branch']
-
-#     def validate_email(self, value):
-#         """Validation personnalisée pour l'email"""
-#         if Client.objects.filter(email=value).exists():
-#             raise serializers.ValidationError("Un client avec cet email existe déjà.")
-#         return value
+    class Meta:
+        model = Profile
+        fields = ["id","user","branch","phone"]
+        read_only_fields = ["id"]
